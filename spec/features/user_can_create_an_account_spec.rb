@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.feature 'user can create an account' do
-  describe 'when user visits page'do
+  describe 'when user visits the home page'do
     it 'they can enter info and create a user account' do
       # region = Region.create(name: "East")
 
@@ -23,5 +23,9 @@ RSpec.feature 'user can create an account' do
       # expect(page).to have_content("East")
       expect(User.count).to eq(1)
     end
+  end
+
+  context "they enter an invalid form" do
+    ## put tests here!
   end
 end
