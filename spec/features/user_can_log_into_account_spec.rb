@@ -16,4 +16,14 @@ RSpec.feature "User can log into their account" do
       expect(current_path).to eq(user_path(user.id))
     end
   end
+
+  context "user enters in invalid credentials" do
+    it "user enters in wrong username" do
+      # put test here!
+    end
+
+    it "user enters in wrong password" do
+      # put test here!
+    end
+  end
 end
