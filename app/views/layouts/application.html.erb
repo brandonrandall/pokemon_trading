@@ -9,6 +9,8 @@
   </head>
 
   <body>
+    Hello, <%= current_user ? current_user.username : "guest" %>
+    <%= "You are a #{current_user.role}" if current_user %>
     <%= yield %>
   </body>
 </html>

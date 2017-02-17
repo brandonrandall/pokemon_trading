@@ -10,18 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215221513) do
+ActiveRecord::Schema.define(version: 20170217210935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "redeem_rewards", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "reward_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reward_id"], name: "index_redeem_rewards_on_reward_id", using: :btree
+    t.index ["user_id"], name: "index_redeem_rewards_on_user_id", using: :btree
+  end
+
+  create_table "reward_favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reward_id"
+    t.index ["reward_id"], name: "index_reward_favorites_on_reward_id", using: :btree
+    t.index ["user_id"], name: "index_reward_favorites_on_user_id", using: :btree
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "cost"
+    t.integer  "status",     default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "username"
     t.string   "password_digest"
-    t.integer  "user_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "role",            default: 1
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
+  add_foreign_key "redeem_rewards", "rewards"
+  add_foreign_key "redeem_rewards", "users"
+  add_foreign_key "reward_favorites", "rewards"
+  add_foreign_key "reward_favorites", "users"
 end
