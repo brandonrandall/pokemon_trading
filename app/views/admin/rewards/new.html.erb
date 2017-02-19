@@ -11,21 +11,23 @@
 
 <% unless @item_results.empty? %>
   <h3>Select rewards to add:</h3>
-  <%= form_for :rewards, url: admin_rewards_path do |f| %>
-    <table>
-    <% @item_results.each do |item_name| %>
-      <tr>
-        <td>
-          <%= item_name %>
-        </td>
-        <td>
-          Cost: <%= f.text_field item_name %>
-        </td>
-      </tr>
+    <%= form_tag admin_rewards_path do %>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Cost</th>
+        </tr>
+        <% @rewards.each do |reward| %>
+          <%= fields_for 'rewards[][]', reward do |f| %>
+            <tr id=<%= reward.name %>>
+              <td><%= reward.name %><%= f.text_field :name, value: reward.name, type: :hidden %></td>
+              <td><%= f.text_field :cost, id: "#{reward.name}[cost]" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+      <br>
+      <%= submit_tag "Create Rewards" %>
     <% end %>
-    </table>
-    <br>
-    <%= f.submit "Create Rewards" %>
-  <% end %>
 <% end %>
 

@@ -6,7 +6,7 @@ class Reward < ApplicationRecord
   has_many :reward_favorites
   has_many :user_favorites, through: :reward_favorites
 
-  enum status: ["archived", "active"]
+  enum status: ["inactive", "active"]
 
   def display_name
     self.name.split("-").map { |word| word.capitalize }.join(" ")

@@ -23,7 +23,7 @@
         <td><%= reward.cost %></td>
         <td>
           <%= link_to "Edit", edit_admin_reward_path(reward) %>
-          <%= link_to "Delete", admin_reward_path(reward), method: :delete  %>
+          <%= link_to "Deactivate", admin_reward_path(reward), method: :delete  %>
         </td>
       </tr>
     <% end %>
@@ -48,13 +48,16 @@
     <% @inactive_rewards.each do |reward| %>
       <tr id=reward_<%= reward.name %> >
         <td>
-          <%= reward.name %>
+          <%= reward.display_name %>
         </td>
         <td>
           <%= reward.cost %>
         </td>
         <td>
-          "Activate Link Goes Here"
+          <%= form_for reward, url: admin_reward_path(reward), method: :put do |f| %>
+              <%= f.text_field :status, value: "active", type: :hidden %>
+              <%= f.submit "Reactivate" %>
+          <% end %>
         </td>
       </tr>
     <% end %>
