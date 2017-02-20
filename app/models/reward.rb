@@ -4,7 +4,7 @@ class Reward < ApplicationRecord
   has_many :redeem_rewards
   has_many :redemptions, through: :redeem_rewards
   has_many :reward_favorites
-  has_many :user_favorites, through: :reward_favorites
+  has_many :favorited_by_users, through: :reward_favorites, source: :user
 
   enum status: ["inactive", "active"]
 

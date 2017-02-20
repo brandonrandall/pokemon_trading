@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217210935) do
+ActiveRecord::Schema.define(version: 20170219220435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170217210935) do
     t.integer  "reward_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "points"
     t.index ["reward_id"], name: "index_redeem_rewards_on_reward_id", using: :btree
     t.index ["user_id"], name: "index_redeem_rewards_on_user_id", using: :btree
   end

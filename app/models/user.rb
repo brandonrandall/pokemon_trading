@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :redeem_rewards
   has_many :rewards, through: :redeem_rewards
   has_many :reward_favorites
-  has_many :favorite_rewards, through: :reward_favorites
+  has_many :favorites, through: :reward_favorites, source: :reward
 
   enum role: [:admin, :user]
 end

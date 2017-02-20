@@ -21,8 +21,8 @@ RSpec.feature 'user can create an account' do
       expect(page).to have_content("Brandon")
       expect(page).to have_content("B1")
       # expect(page).to have_content("East")
+      expect(User.count).to eq(1)
     end
-    expect(User.count).to eq(1)
   end
 
   context "they enter an invalid form" do

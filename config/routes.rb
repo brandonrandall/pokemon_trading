@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     resources :rewards
   end
 
-  resources :rewards, only: [:new, :create]
+  resources :rewards, only: [:index, :new, :create] do
+    resources :favorites, only: [:create, :destroy]
+  end
 end
