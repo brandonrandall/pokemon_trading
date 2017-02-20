@@ -5,8 +5,10 @@
     <h3><%= reward.display_name %></h3>
     <p>Points: <%= reward.cost %></p>
     <% unless current_user.nil? %>
-      <%= form_for reward, url: admin_reward_path(reward) do |f| %>
-        <%= f.text_field :cost, value: reward.cost, type: :hidden %>
+      <%= form_for reward, url: redeem_rewards_path, method: :post do |f| %>
+        <%= f.text_field :reward_id, value: reward.id, type: :hidden %>
+        <%= f.text_field :user_id, value: current_user.id, type: :hidden %>
+        <%= f.text_field :points, value: reward.cost, type: :hidden %>
         <%= f.submit "Redeem" %>
       <% end %>
       <% if reward.favorited_by_users.include?(current_user) %>
