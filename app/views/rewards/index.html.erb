@@ -1,7 +1,7 @@
 <h1>Redeem Points for Rewards!</h1>
 
 <% @rewards.each do |reward| %>
-  <div class="reward_box">
+  <div class="reward_box" id=reward_<%= reward.name %> >
     <h3><%= reward.display_name %></h3>
     <p>Points: <%= reward.cost %></p>
     <% unless current_user.nil? %>

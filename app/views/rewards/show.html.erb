@@ -1,0 +1,11 @@
+<h3>Total Points Redeemed: <%= @points_used %></h3>
+
+<h1>My Redeemed Rewards</h1>
+
+<% @redemptions.each do |redemption| %>
+  <div class="reward_box" id=reward_<%= redemption.id %> >
+    <h3><%= redemption.reward.display_name %></h3>
+    <p>Points: <%= redemption.points %></p>
+    <p>Created: <%= redemption.display_created_at %></p>
+  </div>
+<% end %>
