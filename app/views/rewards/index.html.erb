@@ -1,0 +1,21 @@
+<h1>Redeem Points for Rewards!</h1>
+
+<% @rewards.each do |reward| %>
+  <div class="reward_box" id=reward_<%= reward.name %> >
+    <h3><%= reward.display_name %></h3>
+    <p>Points: <%= reward.cost %></p>
+    <% unless current_user.nil? %>
+      <%= form_for reward, url: redeem_rewards_path, method: :post do |f| %>
+        <%= f.text_field :reward_id, value: reward.id, type: :hidden %>
+        <%= f.text_field :user_id, value: current_user.id, type: :hidden %>
+        <%= f.text_field :points, value: reward.cost, type: :hidden %>
+        <%= f.submit "Redeem" %>
+      <% end %>
+      <% if reward.favorited_by_users.include?(current_user) %>
+        <%= link_to "Unfavorite", reward_favorite_path(reward, current_user), method: :delete %>
+      <% else %>
+        <%= link_to "Favorite", reward_favorites_path(reward), method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

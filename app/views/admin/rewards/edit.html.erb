@@ -1,0 +1,22 @@
+<h1>Edit Reward</h1>
+
+<%= form_for @reward, url: admin_reward_path, method: :put do |f| %>
+    <ul>
+    <% @reward.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+  <table>
+    <tr>
+      <td><%= f.label :name %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :cost %></td>
+      <td><%= f.text_field :cost %></td>
+    </tr>
+  </table>
+  <%= f.submit "Submit" %>
+<% end %>
+
+

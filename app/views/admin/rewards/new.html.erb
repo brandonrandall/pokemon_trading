@@ -1,0 +1,33 @@
+<h1>Create a New Rewards</h1>
+
+<%= form_for :item_list, url: new_admin_reward_path, method: :get do |f| %>
+  <%= f.label :category %>
+  <%= f.select :category_name, @item_categories, include_blank: '' %>
+  <%= f.label :name %>
+  <%= f.text_field :item_name %>
+  <%= f.submit "Filter" %>
+<% end %>
+<br><br>
+
+<% unless @item_results.empty? %>
+  <h3>Select rewards to add:</h3>
+    <%= form_tag admin_rewards_path do %>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Cost</th>
+        </tr>
+        <% @rewards.each do |reward| %>
+          <%= fields_for 'rewards[][]', reward do |f| %>
+            <tr id=<%= reward.name %>>
+              <td><%= reward.name %><%= f.text_field :name, value: reward.name, type: :hidden %></td>
+              <td><%= f.text_field :cost, id: "#{reward.name}[cost]" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+      <br>
+      <%= submit_tag "Create Rewards" %>
+    <% end %>
+<% end %>
+
